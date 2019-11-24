@@ -1,13 +1,19 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import loadImg from '../images/loading.gif';
 import PropTypes from 'prop-types';
-import './App.css';
 
-const App = () => {
-    return (
-        <div className="App">
-          gjhgjh
-        </div>
-    );
+let Loading = ({ loading }) => (
+    loading ?
+        <div className='loading'>
+            <img src={loadImg} alt='loading' />
+            <h1>LOADING</h1>
+        </div> :
+        null
+);
+Loading.propTypes = {
+    loading: PropTypes.bool
 };
-
-export default App;
+const mapStateToProps = (state) => ({loading: state.loading})
+Loading = connect(mapStateToProps,null)(Loading)
+export default Loading;

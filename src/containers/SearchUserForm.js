@@ -1,13 +1,20 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import './App.css';
+import { connect } from 'react-redux';
+import { setUserName, getUserReps } from '../actions';
 
-const App = () => {
+let SearchUserForm = ({setUserName, getUserReps}) => {
     return (
-        <div className="App">
-          gjhgjh
+        <div className="search-form">
+            <input type="text" onChange={e => setUserName(e.target.value)}  />
+            <button onClick={getUserReps}>{'Button'}</button>
         </div>
     );
 };
 
-export default App;
+const mapDispatchToProps = {
+    setUserName: setUserName,
+    getUserReps: getUserReps
+};
+SearchUserForm = connect(null,mapDispatchToProps)(SearchUserForm);
+
+export default SearchUserForm;
