@@ -1,0 +1,12 @@
+.rep-item-list ul {
+    padding: 0;
+}
+.rep-item-list li {
+    padding: 0;
+    margin-top: 2em;
+}
+
+.empty-text {
+    margin-top: 2em;
+    font-size: 1.4em;
+}

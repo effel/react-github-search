@@ -2,12 +2,13 @@ import React from 'react';
 import { connect } from 'react-redux';
 import loadImg from '../images/loading.gif';
 import PropTypes from 'prop-types';
+import './Loading.css';
 
 let Loading = ({ loading }) => (
     loading ?
         <div className='loading'>
             <img src={loadImg} alt='loading' />
-            <h1>LOADING</h1>
+            <h3>LOADING</h3>
         </div> :
         null
 );

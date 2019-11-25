@@ -1,37 +1,34 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types';
+import './RepItemsList.css';
 
-let RepItemsList = ({userList}) => {
+let RepItemsList = ({userList, loading}) => {
+    const userListEmptyHtml = !loading && userList && userList.length === 0  ? <p className="empty-text">The amount of folders is 0</p> : null;
     return (
-        userList ?
+        !loading && userList && userList.length > 0  ?
             <ul className="rep-item-list">
                 {userList.map((item, index) => (
                     <li key={item.id}>
-                        <a href={item.owner.html_url} target='_blank'>
+                        <a href={item.html_url} target='_blank'  rel='noopener noreferrer'>
                             <h2>{item.name}</h2>
-                            Number of stars: {item.stargazers_count}
-                            Forks: {item.forks_count}
+                            <p>Number of stars: {item.stargazers_count}</p>
+                            <p>Forks: {item.forks_count}</p>
                         </a>
                     </li>
                 ))}
             </ul> :
-            null
+            userListEmptyHtml
     );
 };
 RepItemsList.propTypes = {
-    userList: PropTypes.array.shape({
-        name: PropTypes.string,
-        owner: PropTypes.object.shape({
-            html_url: PropTypes.string
-        }),
-        stargazers_count: PropTypes.string,
-        forks_count: PropTypes.string
-    })
+    userList: PropTypes.any,
+    loading: PropTypes.bool
 };
 
 const mapStateToProps = (state) => ({
-    userList: state.items
+    userList: state.items,
+    loading: state.loading
 });
 RepItemsList = connect(mapStateToProps,null)(RepItemsList);
 export default RepItemsList;

@@ -6,7 +6,7 @@ let SearchUserForm = ({setUserName, getUserReps}) => {
     return (
         <div className="search-form">
             <input type="text" onChange={e => setUserName(e.target.value)}  />
-            <button onClick={getUserReps}>{'Button'}</button>
+            <button onClick={getUserReps}>{'Send'}</button>
         </div>
     );
 };
