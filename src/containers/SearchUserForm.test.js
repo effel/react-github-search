@@ -1,21 +1,22 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { setUserName, getUserReps } from '../actions';
-import './SearchUserForm.css';
+import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import SearchUserForm from './SearchUserForm';
+import {applyMiddleware, createStore} from "redux";
+import reducer from "../reducers";
+import {composeWithDevTools} from "redux-devtools-extension";
+import createSagaMiddleware from 'redux-saga';
 
-let SearchUserForm = ({setUserName, getUserReps}) => {
-    return (
-        <div className="search-form">
-            <input type="text" onBlur={e => setUserName(e.target.value)}  />
-            <button onClick={getUserReps}>{'Send'}</button>
-        </div>
-    );
-};
-
-const mapDispatchToProps = {
-    setUserName: setUserName,
-    getUserReps: getUserReps
-};
-SearchUserForm = connect(null,mapDispatchToProps)(SearchUserForm);
-
-export default SearchUserForm;
+it('renders without crashing', () => {
+    const sagaMiddleware = createSagaMiddleware();
+    const store = createStore(
+        reducer,
+        composeWithDevTools(applyMiddleware(sagaMiddleware)
+     ));
+    const div = document.createElement('div');
+    ReactDOM.render(
+        <Provider store={store}>
+            <SearchUserForm />
+        </Provider>, div);
+    ReactDOM.unmountComponentAtNode(div);
+});

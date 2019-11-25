@@ -1,20 +1,22 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import loadImg from '../images/loading.gif';
-import PropTypes from 'prop-types';
-import './Loading.css';
+import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import Loading from './Loading';
+import {applyMiddleware, createStore} from "redux";
+import reducer from "../reducers";
+import {composeWithDevTools} from "redux-devtools-extension";
+import createSagaMiddleware from 'redux-saga';
 
-let Loading = ({ loading }) => (
-    loading ?
-        <div className='loading'>
-            <img src={loadImg} alt='loading' />
-            <h3>LOADING</h3>
-        </div> :
-        null
-);
-Loading.propTypes = {
-    loading: PropTypes.bool
-};
-const mapStateToProps = (state) => ({loading: state.loading})
-Loading = connect(mapStateToProps,null)(Loading)
-export default Loading;
+it('renders without crashing', () => {
+    const sagaMiddleware = createSagaMiddleware();
+    const store = createStore(
+        reducer,
+        composeWithDevTools(applyMiddleware(sagaMiddleware)
+        ));
+    const div = document.createElement('div');
+    ReactDOM.render(
+        <Provider store={store}>
+            (<Loading />
+        </Provider>, div);
+    ReactDOM.unmountComponentAtNode(div);
+});

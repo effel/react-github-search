@@ -1,9 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
 import App from './App';
+import {applyMiddleware, createStore} from "redux";
+import reducer from "../reducers";
+import {composeWithDevTools} from "redux-devtools-extension";
+import createSagaMiddleware from 'redux-saga';
 
 it('renders without crashing', () => {
+  const sagaMiddleware = createSagaMiddleware();
+  const store = createStore(
+      reducer,
+      composeWithDevTools(applyMiddleware(sagaMiddleware)
+      ));
   const div = document.createElement('div');
-  ReactDOM.render(<App />, div);
+  ReactDOM.render(
+      <Provider store={store}>
+        (<App />
+      </Provider>, div);
   ReactDOM.unmountComponentAtNode(div);
 });
