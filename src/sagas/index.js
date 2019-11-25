@@ -9,7 +9,11 @@ function* fetchGithubFolders() {
             return githubResponse.json();
         }
         const responseResult = yield call(fetchFolders);
-        yield put(foldersReceived(responseResult));
+        if (Array.isArray(responseResult)) {
+            yield put(foldersReceived(responseResult));
+        } else {
+            yield put(setError());
+        }
     }
     catch (e) {
         yield put(setError());
