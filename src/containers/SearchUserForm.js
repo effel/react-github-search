@@ -5,7 +5,7 @@ import { setUserName, getUserReps } from '../actions';
 let SearchUserForm = ({setUserName, getUserReps}) => {
     return (
         <div className="search-form">
-            <input type="text" onChange={e => setUserName(e.target.value)}  />
+            <input type="text" onBlur={e => setUserName(e.target.value)}  />
             <button onClick={getUserReps}>{'Send'}</button>
         </div>
     );

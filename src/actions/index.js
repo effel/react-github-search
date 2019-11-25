@@ -11,3 +11,7 @@ export const foldersReceived = (json) => ({
     type: 'FOLDERS_RECEIVED',
     json
 });
+
+export const setError = () => ({
+    type: 'ERROR'
+});

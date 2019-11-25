@@ -5,8 +5,12 @@
     padding: 0;
     margin-top: 2em;
 }
-
 .empty-text {
     margin-top: 2em;
     font-size: 1.4em;
+}
+.error-text {
+    margin-top: 2em;
+    font-size: 1.4em;
+    color: red;
 }

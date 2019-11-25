@@ -6,13 +6,14 @@ import { Provider } from 'react-redux';
 import reducer from './reducers';
 import App from './components/App';
 import rootSaga from './sagas';
+import { composeWithDevTools } from 'redux-devtools-extension'
 import './index.css';
 const sagaMiddleware = createSagaMiddleware();
 
 const store = createStore(
     reducer,
-    applyMiddleware(sagaMiddleware),
-);
+    composeWithDevTools(applyMiddleware(sagaMiddleware)
+));
 sagaMiddleware.run(rootSaga);
 render(
     <Provider store={store}>

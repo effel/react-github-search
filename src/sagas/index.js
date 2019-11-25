@@ -1,5 +1,5 @@
 import { call, put, all, takeLatest, select } from 'redux-saga/effects';
-import { foldersReceived } from '../actions';
+import { foldersReceived, setError } from '../actions';
 
 function* fetchGithubFolders() {
     try {
@@ -9,10 +9,14 @@ function* fetchGithubFolders() {
             return githubResponse.json();
         }
         const responseResult = yield call(fetchFolders);
-        yield put(foldersReceived(responseResult));
+        if (Array.isArray(responseResult)) {
+            yield put(foldersReceived(responseResult));
+        } else {
+            yield put(setError());
+        }
     }
     catch (e) {
-        console.log(e);
+        yield put(setError);
     }
 }
 function* actionWatcher() {
