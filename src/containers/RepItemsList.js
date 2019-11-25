@@ -27,8 +27,8 @@ let RepItemsList = ({userList, hasError}) => {
 
     return (
         userList ?
-        userList.length > 0 ? <UserListHtml/> : <UserListEmptyHtml/>
-        : hasError ? <UserListErrorHtml/> : null
+        userList.length > 0 ? <UserListHtml/> : hasError ? <UserListErrorHtml/> : <UserListEmptyHtml/>
+        : null
     );
 };
 RepItemsList.propTypes = {

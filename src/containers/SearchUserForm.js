@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { setUserName, getUserReps } from '../actions';
+import './SearchUserForm.css';
 
 let SearchUserForm = ({setUserName, getUserReps}) => {
     return (
